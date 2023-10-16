@@ -5,7 +5,7 @@ function elisc_tm_movingbox() {
 }
 function elisc_tm_page_transition() {
     "use strict"; var section = jQuery('.elisc_tm_section'); var allLi = jQuery('.transition_link li'); var button = jQuery('.transition_link a'); var wrapper = jQuery('.elisc_tm_all_wrap'); var enter = wrapper.data('enter'); var exit = wrapper.data('exit'); button.on('click', function () {
-        var element = jQuery(this); var href = element.attr('href'); if (element.parent().hasClass('elisc_tm_button')) { jQuery('.menu .transition_link a[href="' + href + '"]').trigger('click'); hashtag(); return false; }
+        var element = jQuery(this); var href = element.attr('href'); if (element.parent().hasClass('elisc_tm_button')) { jQuery('.menu .transition_link a[href="' + href + '"]').trigger('click'); return false; }
         var sectionID = jQuery(href); var parent = element.closest('li'); if (!parent.hasClass('active')) {
             allLi.removeClass('active'); wrapper.find(section).removeClass('animated ' + enter); if (wrapper.hasClass('opened')) { wrapper.find(section).addClass('animated ' + exit); }
             parent.addClass('active'); wrapper.addClass('opened'); wrapper.find(sectionID).removeClass('animated ' + exit).addClass('animated ' + enter); jQuery(section).addClass('hidden'); jQuery(sectionID).removeClass('hidden').addClass('active');
