@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Poweroftech2020
+      MYSQL_DATABASE: resumedawamr
+      MYSQL_USER: fiber
+      MYSQL_PASSWORD: Poweroftech2020
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  go-appcv:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: fiber
+      DB_PASSWORD: Poweroftech2020
+      DB_NAME: resumedawamr
+      APP_HOST: 0.0.0.0
+      APP_PORT: 4000
+    ports:
+      - "4001:4000"
+    restart: always
+
+volumes:
+  mysql_data:
