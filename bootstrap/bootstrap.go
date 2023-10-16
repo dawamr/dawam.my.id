@@ -14,15 +14,18 @@ import (
 func NewApplication() *fiber.App {
 	env.SetupEnvFile()
 	database.SetupDatabase()
-	engine := html.New("./views", ".html")
+
 	app := fiber.New(fiber.Config{
-		Views:        engine,
+		Views:        html.New("./views", ".html"),
 		AppName:      "Resume Dawam Raja",
 		ServerHeader: "Fiber",
 	})
+
 	app.Use(recover.New())
 	app.Use(logger.New())
+
 	app.Get("/dashboard", monitor.New())
+
 	router.InstallRouter(app)
 
 	return app
