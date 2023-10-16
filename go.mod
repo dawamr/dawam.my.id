@@ -1,4 +1,4 @@
-module github.com/kooroshh/fiber-boostrap
+module github.com/dawamr/resume-cv-2023
 
 go 1.18
 
@@ -20,8 +20,6 @@ require (
 	github.com/gofiber/template v1.8.2 // indirect
 	github.com/gofiber/utils v1.1.0 // indirect
 	github.com/google/uuid v1.3.1 // indirect
-	github.com/gravityblast/fresh v0.0.0-20190826141211-0fa698148017 // indirect
-	github.com/howeyc/fsnotify v0.9.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/klauspost/compress v1.16.7 // indirect
@@ -30,8 +28,6 @@ require (
 	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/philhofer/fwd v1.1.2 // indirect
-	github.com/pilu/config v0.0.0-20131214182432-3eb99e6c0b9a // indirect
-	github.com/pilu/fresh v0.0.0-20190826141211-0fa698148017 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/tinylib/msgp v1.1.8 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect

@@ -1,6 +1,10 @@
 package env
 
-import "github.com/joho/godotenv"
+import (
+	"os"
+
+	"github.com/joho/godotenv"
+)
 
 var Env map[string]string
 
@@ -16,7 +20,12 @@ func SetupEnvFile() {
 	var err any
 	Env, err = godotenv.Read(envFile)
 	if err != nil {
-		panic(err)
+		defaultVariables := []string{"DB_USER", "DB_PASSWORD", "DB_PORT", "DB_NAME"}
+		for _, key := range defaultVariables {
+			if value := os.Getenv(key); value != "" {
+				Env[key] = value
+			}
+		}
 	}
 
 }
