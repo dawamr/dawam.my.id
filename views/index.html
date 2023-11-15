@@ -369,7 +369,7 @@
                   <div class="elisc_tm_sticky_section">
                     <div class="list">
                       <ul>
-                        {{ $CMS_HOST := .CMS_HOST }}
+                        {{ $CMS_HOST := "https://cms.dawam.my.id" }}
                         {{range .Blog}}
                         <li>
                           <img class="popup_image" src="{{ $CMS_HOST }}/assets/{{ .Banner.FilenameDisk }}" alt="alt" />
