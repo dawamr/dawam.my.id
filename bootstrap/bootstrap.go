@@ -1,6 +1,8 @@
 package bootstrap
 
 import (
+	"html/template"
+
 	"github.com/dawamr/resume-cv-2023/pkg/database"
 	"github.com/dawamr/resume-cv-2023/pkg/env"
 	"github.com/dawamr/resume-cv-2023/pkg/router"
@@ -15,15 +17,22 @@ func NewApplication() *fiber.App {
 	env.SetupEnvFile()
 	database.SetupDatabase()
 
+	engine := html.New("./views", ".html")
+    engine.AddFunc(
+        // add unescape function
+        "unescape", func(s string) template.HTML {
+            return template.HTML(s)
+        },
+    )
 	app := fiber.New(fiber.Config{
-		Views:        html.New("./views", ".html"),
+		Views:        engine,
 		AppName:      "Resume Dawam Raja",
 		ServerHeader: "Fiber",
 	})
 
 	app.Use(recover.New())
 	app.Use(logger.New())
-
+	
 	app.Get("/dashboard", monitor.New())
 
 	router.InstallRouter(app)

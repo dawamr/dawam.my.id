@@ -28,6 +28,7 @@ services:
       APP_HOST: "0.0.0.0"
       APP_PORT: "4000"
       APP_ENV: "production"
+      CMS_HOST: "https://cms.dawam.my.id"
     ports:
       - "4001:4000"
     restart: always
