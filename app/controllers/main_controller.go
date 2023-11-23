@@ -3,6 +3,8 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"net/http"
 	"net/url"
 	"time"
 
@@ -15,18 +17,27 @@ func RenderHello(c *fiber.Ctx) (err error) {
 	skills := getSkill();
 	portfolio := getPortofolio();
 
-	apiURL := env.GetEnv("CMS_HOST", "https://cms.dawam.my.id") + "/items/Blog?sort=-date_created&fields=*,category_id.name,banner.*"
-	agent := fiber.Get(apiURL)
-	_, body, _ := agent.Bytes()
+	url := "https://cms.dawam.my.id/items/Blog?sort=-date_created&fields=*,category_id.name,banner.*"
+	resp, err := http.Get(url)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).SendString("Error fetching data")
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).SendString("Error reading response body")
+	}
 
 	var bodyBlog APIResponse
 	if err := json.Unmarshal(body, &bodyBlog); err != nil {
+		fmt.Println(body)
 		bodyBlog = APIResponse{}
 	}
 	blogs := bodyBlog.Data
 	
 	return c.Render("index", fiber.Map{
-		"CMS_HOST":        env.GetEnv("CMS_HOST", "http://localhost"),
+		"CMS_HOST":        env.GetEnv("CMS_HOST", "https://cms.dawam.my.id"),
 		"Name":            "Dawam Raja",
 		"Email":           "id.dawamraja@gmail.com",
 		"Phone":           "+6285174427553",
